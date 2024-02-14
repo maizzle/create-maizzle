@@ -1,20 +1,28 @@
 {
-    "name": "create-maizzle",
-    "version": "0.0.1",
-    "description": "Quickly start a new Maizzle project.",
-    "license": "MIT",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/maizzle/framework.git"
-    },
-    "bugs": "https://github.com/maizzle/framework/issues",
-    "homepage": "https://maizzle.com",
-    "author": "Cosmin Popovici (https://github.com/cossssmin)",
-    "dependencies": {
-        "@clack/prompts": "^0.7.0",
-        "picocolors": "^1.0.0"
-    }
+  "name": "create-maizzle",
+  "version": "0.0.1",
+  "description": "Quickly start a new Maizzle project.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "create-maizzle": "bin/create-maizzle.mjs"
+  },
+  "files": [
+    "bin"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maizzle/framework.git"
+  },
+  "bugs": "https://github.com/maizzle/framework/issues",
+  "homepage": "https://maizzle.com",
+  "author": "Cosmin Popovici (https://github.com/cossssmin)",
+  "dependencies": {
+    "@clack/prompts": "^0.7.0",
+    "degit": "^2.8.4",
+    "picocolors": "^1.0.0"
+  }
 }
