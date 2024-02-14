@@ -2,12 +2,12 @@
   <p>
     <a href="https://maizzle.com" target="_blank">
       <picture>
-        <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/maizzle/framework/HEAD/.github/media/logo-dark.svg">
-        <img alt="Maizzle" src="https://raw.githubusercontent.com/maizzle/framework/HEAD/.github/media/logo-light.svg" width="300" height="225" style="max-width: 100%;">
+        <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/maizzle/create-maizzle/HEAD/.github/media/cli-mark-dark.svg">
+        <img alt="Maizzle" src="https://raw.githubusercontent.com/maizzle/create-maizzle/HEAD/.github/media/cli-mark-light.svg" width="300" height="225" style="max-width: 100%;">
       </picture>
     </a>
   </p>
-  <p>Quickly build HTML emails with utility-first CSS</p>
+  <p>Quickly scaffold a Maizzle project</p>
   <div>
 
   [![Version][npm-version-shield]][npm]
@@ -21,6 +21,28 @@
 ## About
 
 CLI tool to help you quickly start a new Maizzle project.
+
+## Usage
+
+```bash
+npx create-maizzle
+```
+
+Then, follow the prompts to create a new Maizzle project.
+
+## Installation
+
+You may also install the tool locally:
+
+```bash
+npm install -g create-maizzle
+```
+
+This will make the command available globally on your machine:
+
+```bash
+create-maizzle
+```
 
 ## Documentation
 
