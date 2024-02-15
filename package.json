@@ -21,6 +21,21 @@
   "bugs": "https://github.com/maizzle/create-maizzle/issues",
   "homepage": "https://maizzle.com",
   "author": "Cosmin Popovici (https://github.com/cossssmin)",
+  "keywords": [
+    "maizzle",
+    "create-maizzle",
+    "create-email",
+    "tailwindcss",
+    "responsive-email",
+    "email-framework",
+    "email-template",
+    "email-marketing",
+    "email-campaigns",
+    "email-newsletter",
+    "email-boilerplate",
+    "html-emails",
+    "email-cli"
+  ],
   "dependencies": {
     "@clack/prompts": "^0.7.0",
     "degit": "^2.8.4",
