@@ -53,7 +53,7 @@ Maizzle documentation is available at https://maizzle.com
 The Maizzle framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 [npm]: https://www.npmjs.com/package/create-maizzle
-[npm-stats]: http://npm-stats.org/#/create-maizzle
+[npm-stats]: https://npm-stat.com/charts.html?package=create-maizzle&from=2024-02-15
 [npm-version-shield]: https://img.shields.io/npm/v/create-maizzle.svg
 [npm-stats-shield]: https://img.shields.io/npm/dt/create-maizzle.svg?color=4f46e5
 [github-ci]: https://github.com/maizzle/create-maizzle/actions
