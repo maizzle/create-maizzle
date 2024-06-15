@@ -7,6 +7,7 @@
   "bin": {
     "create-maizzle": "bin/create-maizzle.mjs"
   },
+  "exports": "./src/index.js",
   "files": [
     "bin",
     "src"
