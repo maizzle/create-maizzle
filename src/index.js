@@ -56,6 +56,7 @@ export async function main() {
           message: 'Select a Starter',
           initialValue: 'maizzle/maizzle',
           options: [
+            { value: 'maizzle/starter-5.0.0-beta', label: '5.0.0-beta' },
             { value: 'maizzle/maizzle', label: 'Default' },
             { value: 'custom', label: 'Custom' },
           ],
