@@ -6,6 +6,10 @@ import { installDependencies } from 'nypm'
 
 const starters = [
   {
+    label: '5.0.0-beta',
+    value: 'maizzle/starter-5.0.0-beta',
+  },
+  {
     label: 'API',
     value: 'maizzle/starter-api',
   },
