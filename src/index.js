@@ -18,6 +18,10 @@ const starters = [
     value: 'maizzle/starter-amp4email',
   },
   {
+    label: 'Liquid',
+    value: 'maizzle/starter-liquid',
+  },
+  {
     label: 'Mailchimp',
     value: 'maizzle/starter-mailchimp',
   },
