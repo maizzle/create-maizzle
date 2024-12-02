@@ -41,7 +41,7 @@
   "dependencies": {
     "@clack/prompts": "^0.8.1",
     "degit": "^2.8.4",
-    "nypm": "^0.3.6",
+    "nypm": "^0.4.1",
     "picocolors": "^1.0.0"
   }
 }
