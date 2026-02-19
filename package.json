@@ -40,7 +40,7 @@
   ],
   "dependencies": {
     "@clack/prompts": "^1.0.1",
-    "degit": "^2.8.4",
+    "giget": "^2.0.0",
     "nypm": "^0.6.5",
     "picocolors": "^1.0.0"
   }
