@@ -42,7 +42,18 @@ const starters = [
 export async function main() {
   console.clear()
 
-  p.intro(`${color.bgCyan(color.black(' create-maizzle '))}`)
+  console.log(`\n                           ░██                      ░██
+                                                    ░██
+░█████████████   ░██████   ░██░█████████ ░█████████ ░██  ░███████
+░██   ░██   ░██       ░██  ░██     ░███       ░███  ░██ ░██    ░██
+░██   ░██   ░██  ░███████  ░██   ░███       ░███    ░██ ░█████████
+░██   ░██   ░██ ░██   ░██  ░██ ░███       ░███      ░██ ░██
+░██   ░██   ░██  ░█████░██ ░██░█████████ ░█████████ ░██  ░███████`)
+
+  console.log(`\n${color.dim('Quickly build HTML emails with Tailwind CSS.')}\n`)
+  console.log(`Docs:       https://maizzle.com \nGitHub:     https://github.com/maizzle\n\nComponents: https://mailviews.com\n`)
+
+p.intro(`${color.bgBlack(color.white(' create-maizzle '))}`)
 
   const project = await p.group(
     {
