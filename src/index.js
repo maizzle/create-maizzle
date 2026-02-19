@@ -2,6 +2,7 @@ import { downloadTemplate } from 'giget'
 import color from 'picocolors'
 import * as p from '@clack/prompts'
 import { rm } from 'node:fs/promises'
+import { existsSync } from 'node:fs'
 import { installDependencies } from 'nypm'
 
 const starters = [
@@ -77,6 +78,7 @@ p.intro(`${color.bgBlack(color.white(' create-maizzle '))}`)
           validate: value => {
             if (!value) return 'Please enter a path.'
             if (value[0] !== '.') return 'Please enter a relative path.'
+            if (existsSync(value)) return 'That directory already exists. Please enter a different path.'
           },
         }),
       starter: async () => {
