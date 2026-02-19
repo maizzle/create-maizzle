@@ -3,7 +3,8 @@ import color from 'picocolors'
 import * as p from '@clack/prompts'
 import { rm } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
-import { installDependencies } from 'nypm'
+import { execFileSync } from 'node:child_process'
+import { installDependencies, detectPackageManager } from 'nypm'
 
 const starters = [
   {
@@ -55,8 +56,21 @@ const starters = [
 
 export async function main() {
   const args = process.argv.slice(2)
-  const flags = args.filter(a => a.startsWith('-'))
-  const positional = args.filter(a => !a.startsWith('-'))
+  const positional = []
+  let installFlag = false
+  let pmFlag
+
+  for (let i = 0; i < args.length; i++) {
+    if (args[i] === '-i' || args[i] === '--install') {
+      installFlag = true
+    } else if (args[i] === '--pm' && args[i + 1]) {
+      pmFlag = args[++i]
+    } else if (args[i].startsWith('--pm=')) {
+      pmFlag = args[i].split('=')[1]
+    } else if (!args[i].startsWith('-')) {
+      positional.push(args[i])
+    }
+  }
 
   let project
 
@@ -72,7 +86,8 @@ export async function main() {
     project = {
       starter: starterInput,
       path: dirInput,
-      install: flags.includes('-i') || flags.includes('--install'),
+      install: installFlag,
+      pm: pmFlag || 'npm',
     }
   } else {
     console.clear()
@@ -141,6 +156,22 @@ export async function main() {
             message: 'Install dependencies?',
             initialValue: true,
           }),
+        pm: async ({ results }) => {
+          if (!results.install) return 'npm'
+
+          const detected = await detectPackageManager(process.cwd()).catch(() => null)
+
+          return p.select({
+            message: 'Select a package manager',
+            initialValue: detected?.name || 'npm',
+            options: [
+              { value: 'npm', label: 'npm' },
+              { value: 'pnpm', label: 'pnpm' },
+              { value: 'yarn', label: 'yarn' },
+              { value: 'bun', label: 'bun' },
+            ],
+          })
+        },
       },
       {
         onCancel: () => {
@@ -179,19 +210,29 @@ export async function main() {
    * Install dependencies
    */
   if (project.install) {
+    try {
+      execFileSync(project.pm, ['--version'], { stdio: 'ignore' })
+    } catch {
+      p.log.error(`${project.pm} is not installed. Please install it first.`)
+      process.exit(1)
+    }
+
     spinner.start('Installing dependencies')
     const startTime = Date.now()
 
     await installDependencies({
       cwd: project.path,
       silent: true,
-      packageManager: 'npm',
+      packageManager: project.pm,
     })
 
     spinner.stop(`Installed dependencies ${color.gray((Date.now() - startTime) / 1000 + 's')}`)
   }
 
-  let nextSteps = `cd ${project.path}        \n\n${project.install ? '' : 'npm install\n\n'}npm run dev`
+  const pm = project.pm || 'npm'
+  const runCmd = pm === 'yarn' ? 'yarn dev' : `${pm} run dev`
+
+  let nextSteps = `cd ${project.path}        \n\n${project.install ? '' : `${pm} install\n\n`}${runCmd}`
 
   p.note(nextSteps, 'Next steps:')
 
