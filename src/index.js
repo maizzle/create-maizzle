@@ -54,9 +54,30 @@ const starters = [
 ]
 
 export async function main() {
-  console.clear()
+  const args = process.argv.slice(2)
+  const flags = args.filter(a => a.startsWith('-'))
+  const positional = args.filter(a => !a.startsWith('-'))
 
-  console.log(`\n                           ░██                      ░██
+  let project
+
+  if (positional.length > 0) {
+    const starterInput = positional[0]
+    const dirInput = positional[1] || `./${starterInput.split('/').pop().replace('.git', '')}`
+
+    if (existsSync(dirInput)) {
+      console.error(`Error: directory ${dirInput} already exists.`)
+      process.exit(1)
+    }
+
+    project = {
+      starter: starterInput,
+      path: dirInput,
+      install: flags.includes('-i') || flags.includes('--install'),
+    }
+  } else {
+    console.clear()
+
+    console.log(`\n                           ░██                      ░██
                                                     ░██
 ░█████████████   ░██████   ░██░█████████ ░█████████ ░██  ░███████
 ░██   ░██   ░██       ░██  ░██     ░███       ░███  ░██ ░██    ░██
@@ -64,70 +85,71 @@ export async function main() {
 ░██   ░██   ░██ ░██   ░██  ░██ ░███       ░███      ░██ ░██
 ░██   ░██   ░██  ░█████░██ ░██░█████████ ░█████████ ░██  ░███████`)
 
-  console.log(`\n${color.dim('Quickly build HTML emails with Tailwind CSS.')}\n`)
-  console.log(`Docs:       https://maizzle.com \nGitHub:     https://github.com/maizzle\n`)
+    console.log(`\n${color.dim('Quickly build HTML emails with Tailwind CSS.')}\n`)
+    console.log(`Docs:       https://maizzle.com \nGitHub:     https://github.com/maizzle\n`)
 
-p.intro(`${color.bgBlack(color.white(' create-maizzle '))}`)
+  p.intro(`${color.bgBlack(color.white(' create-maizzle '))}`)
 
-  const project = await p.group(
-    {
-      path: () =>
-        p.text({
-          message: 'Where should we create your project?',
-          placeholder: './maizzle',
-          validate: value => {
-            if (!value) return 'Please enter a path.'
-            if (value[0] !== '.') return 'Please enter a relative path.'
-            if (existsSync(value)) return 'That directory already exists. Please enter a different path.'
-          },
-        }),
-      starter: async () => {
-        const starter = await p.select({
-          message: 'Select a Starter',
-          initialValue: 'maizzle/maizzle',
-          options: [
-            { value: 'maizzle/maizzle', label: 'Default' },
-            { value: 'custom', label: 'Custom' },
-          ],
-        })
-
-        if (starter === 'custom') {
-          const customStarter = await p.select({
-            message: 'Select a custom Starter',
+    project = await p.group(
+      {
+        path: () =>
+          p.text({
+            message: 'Where should we create your project?',
+            placeholder: './maizzle',
+            validate: value => {
+              if (!value) return 'Please enter a path.'
+              if (value[0] !== '.') return 'Please enter a relative path.'
+              if (existsSync(value)) return 'That directory already exists. Please enter a different path.'
+            },
+          }),
+        starter: async () => {
+          const starter = await p.select({
+            message: 'Select a Starter',
             initialValue: 'maizzle/maizzle',
             options: [
-              ...starters,
-              { value: 'git', label: 'Git', hint: 'user/repo' },
+              { value: 'maizzle/maizzle', label: 'Default' },
+              { value: 'custom', label: 'Custom' },
             ],
           })
 
-          if (customStarter === 'git') {
-            return p.text({
-              message: 'Enter a `user/repo` path or a full Git repository URL.',
-              validate: value => {
-                if (!value) return 'Please enter a value.'
-              },
+          if (starter === 'custom') {
+            const customStarter = await p.select({
+              message: 'Select a custom Starter',
+              initialValue: 'maizzle/maizzle',
+              options: [
+                ...starters,
+                { value: 'git', label: 'Git', hint: 'user/repo' },
+              ],
             })
+
+            if (customStarter === 'git') {
+              return p.text({
+                message: 'Enter a `user/repo` path or a full Git repository URL.',
+                validate: value => {
+                  if (!value) return 'Please enter a value.'
+                },
+              })
+            }
+
+            return customStarter
           }
 
-          return customStarter
-        }
-
-        return starter
+          return starter
+        },
+        install: () =>
+          p.confirm({
+            message: 'Install dependencies?',
+            initialValue: true,
+          }),
       },
-      install: () =>
-        p.confirm({
-          message: 'Install dependencies?',
-          initialValue: true,
-        }),
-    },
-    {
-      onCancel: () => {
-        p.cancel('💀')
-        process.exit(0)
-      },
-    }
-  )
+      {
+        onCancel: () => {
+          p.cancel('💀')
+          process.exit(0)
+        },
+      }
+    )
+  }
 
   const spinner = p.spinner()
 

@@ -24,11 +24,29 @@ CLI tool to help you quickly start a new Maizzle project.
 
 ## Usage
 
+Interactive mode:
+
 ```bash
 npx create-maizzle
 ```
 
-Then, follow the prompts to create a new Maizzle project.
+Scaffold a project immediately, using the official starter:
+
+```bash
+npx create-maizzle maizzle/maizzle # user/repo#ref
+```
+
+Specify a target directory:
+
+```bash
+npx create-maizzle maizzle/maizzle my-project
+```
+
+Automatically install dependencies:
+
+```bash
+npx create-maizzle maizzle/maizzle my-project --install # or -i
+```
 
 ## Installation
 
