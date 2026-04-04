@@ -124,8 +124,13 @@ export async function main() {
             options: [
               { value: 'maizzle/maizzle', label: 'Default' },
               { value: 'custom', label: 'Custom' },
+              { value: 'maizzle6-beta', label: 'Maizzle 6 (beta)' },
             ],
           })
+
+          if (starter === 'maizzle6-beta') {
+            return 'maizzle/maizzle#next'
+          }
 
           if (starter === 'custom') {
             const customStarter = await p.select({
