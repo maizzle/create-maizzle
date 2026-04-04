@@ -1,6 +1,6 @@
 {
   "name": "create-maizzle",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Quickly start a new Maizzle project.",
   "license": "MIT",
   "type": "module",
