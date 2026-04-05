@@ -126,7 +126,7 @@ export async function main() {
     renderHeader()
 
     console.log(`\n${color.dim('Quickly build HTML emails with Tailwind CSS.')}\n`)
-    console.log(`Docs:       https://maizzle.com \nGitHub:     https://github.com/maizzle\n`)
+    console.log(`Docs:    https://maizzle.com \nGitHub:  https://github.com/maizzle\n`)
 
   p.intro(`${color.bgBlack(color.white(' create-maizzle '))}`)
 
