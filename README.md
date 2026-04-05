@@ -30,6 +30,10 @@ CLI tool to help you quickly start a new Maizzle project.
 npx create-maizzle
 ```
 
+This will start the interactive setup:
+
+![Maizzle CLI preview](https://github.com/maizzle/create-maizzle/raw/master/.github/preview.jpg)
+
 ### Scaffold a project immediately
 
 ```bash
